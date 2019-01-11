@@ -1,0 +1,141 @@
+<html>
+    <head>
+  <title>Paper Stone and Scissors</title>
+  <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="score-container">
+                <p id="scoreUser">0</p>
+                <p>:</p>
+                <p id="scoreComputer">0</p>
+            </div>
+            <div class="game-container">
+                    <div class="user-container">
+                            <img id="stone" src="stone.jpg"/>
+                            <img id="scissors" src="scissors.jpg">
+                            <img id="paper" src="paper.jpg">
+                      </div>
+                      <div class="computer-container">
+                            <img id="computer"/>
+                      </div>
+            </div>
+              
+        </div>  
+        <script>
+         var paperButton = document.querySelector('#paper');
+         var stoneButton = document.querySelector('#stone');
+         var scissorsButton = document.querySelector('#scissors');
+         var computerChoice = document.getElementById('computer');
+         var winsUser = 0;
+         var winsComputer = 0;
+         var scoreComputer = document.getElementById('scoreComputer');
+         var scoreUser = document.getElementById('scoreUser');
+         //Adding click event to the possible user choices
+         paperButton.addEventListener('click', paperFunction);
+         stoneButton.addEventListener('click',stoneFunction);
+         scissorsButton.addEventListener('click', scissorsFunction);
+         
+         //Runs when the user choose paper
+         function paperFunction(){
+             //Removing the click event while changing the score
+            stoneButton.removeEventListener('click', stoneFunction);
+            scissorsButton.removeEventListener('click', scissorsFunction); 
+            //Getting the user choice
+            var randomChoice1 = randomChoice();
+            //Checking if the user win
+             if(randomChoice1 == 0){
+                 console.log('0')
+                 console.log('draw')
+             }else if(randomChoice1 == 1){
+                 console.log('1')
+                 console.log('win')
+                 winsUser++;
+                 scoreUser.innerText = winsUser;
+             }else{
+                 console.log('2');
+                 console.log('lose')
+                 winsComputer++;
+                 scoreComputer.innerText = winsComputer;
+             }
+            //Adding back the click event
+             stoneButton.addEventListener('click', stoneFunction);
+            scissorsButton.addEventListener('click', scissorsFunction); 
+         }
+         function stoneFunction(){
+              //Removing the click event while changing the score
+             paperButton.removeEventListener('click', paperFunction);
+             scissorsButton.removeEventListener('click', scissorsFunction);
+              //Getting the user choice
+            var randomChoice1 = randomChoice();
+            //Checking if the user win
+             if(randomChoice1 == 0){
+                 console.log('lose')
+                 console.log(randomChoice1);
+                 winsComputer++;
+                 scoreComputer.innerText = winsComputer;
+             }else if(randomChoice1 == 1){
+                 console.log('draw')
+                 console.log(randomChoice1);
+             }else{
+                 console.log('win')
+                 console.log(randomChoice1);
+                 winsUser++;
+                 scoreUser.innerText = winsUser;
+             }
+             //Adding back the click event
+             paperButton.addEventListener('click', paperFunction);
+             scissorsButton.addEventListener('click', scissorsFunction);
+         }
+         function scissorsFunction() {
+              //Removing the click event while changing the score
+            paperButton.removeEventListener('click', paperFunction);
+            stoneButton.removeEventListener('click', stoneFunction);
+                //Getting the user choice
+            var randomChoice1 = randomChoice();
+             //Checking if the user win
+             if(randomChoice1 == 0){
+                 console.log('win')
+                 winsUser++;
+                 scoreUser.innerText = winsUser;
+             }else if(randomChoice1 == 1){
+                 console.log('lose')
+                 winsComputer++;
+                 scoreComputer.innerText = winsComputer;
+             }else{
+                 console.log('draw')
+             }
+             //Adding back the click event
+             paperButton.addEventListener('click', paperFunction);
+             stoneButton.addEventListener('click', stoneFunction);   
+         }
+         
+         function randomChoice(){
+             //Ranodmize the computer chioce using random function
+             // 0 is paper 
+             // 1 is stone
+             // 2 is scissors
+             var randomNumber = Math.floor(Math.random() * 3);
+             console.log(computerChoice);
+             if(randomNumber == 0){
+                 //Adding the paper img and display the choice
+               computerChoice.src = 'paper.jpg';
+               computerChoice.setAttribute("style","display: block;")
+               console.log(computerChoice);
+             }else if(randomNumber == 1){
+                    //Adding the stone img and display the choice
+                computerChoice.src = 'stone.jpg';
+                computerChoice.setAttribute("style","display: block;")
+                console.log(computerChoice);
+             }else {
+                  //Adding the scissors img and display the choice
+                computerChoice.src = 'scissors.jpg';
+                computerChoice.setAttribute("style","display: block;")
+                console.log(computerChoice);
+             }
+             //Returning the choice number
+             return randomNumber; 
+         }
+        </script>
+    </body>
+</html>
